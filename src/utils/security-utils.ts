@@ -1,118 +1,50 @@
 /**
- * Security utilities for hiding sensitive information from browser console
- * This module provides comprehensive protection against sensitive data exposure
+ * SIMPLIFIED Security utilities - minimal interference with React
+ * Only basic URL hiding, no console overrides to prevent React issues
  */
-
-// List of sensitive patterns to hide from console - ONLY truly sensitive data
-const SENSITIVE_PATTERNS = [
-  // Backend URLs - only the specific sensitive ones
-  'langflow-tv34o.ondigitalocean.app',
-  'backend.axiestudio.se',
-
-  // Authentication tokens - only when they appear with actual values
-  'Bearer sk-RHx76uBvpHS4UxrnYnQQvelJ3UFcSJJqfJGF2CRHnu8',
-  'sk-RHx76uBvpHS4UxrnYnQQvelJ3UFcSJJqfJGF2CRHnu8',
-
-  // Only specific API endpoints that expose sensitive info
-  'auto_login', 'refresh'
-];
-
-// Additional patterns for URLs and tokens - ONLY specific sensitive ones
-const URL_PATTERNS = [
-  /langflow-tv34o\.ondigitalocean\.app/g,  // Only our specific backend URL
-  /backend\.axiestudio\.se/g,  // Only our specific backend URL
-  /Bearer\s+sk-RHx76uBvpHS4UxrnYnQQvelJ3UFcSJJqfJGF2CRHnu8/g,  // Only our specific API key
-  /sk-RHx76uBvpHS4UxrnYnQQvelJ3UFcSJJqfJGF2CRHnu8/g  // Only our specific API key
-];
 
 /**
- * Checks if a message contains sensitive information
+ * Simple URL sanitizer for network requests only
  */
-export function containsSensitiveInfo(message: string): boolean {
-  // Check for exact pattern matches
-  for (const pattern of SENSITIVE_PATTERNS) {
-    if (message.includes(pattern)) {
-      return true;
-    }
-  }
-  
-  // Check for regex patterns
-  for (const pattern of URL_PATTERNS) {
-    if (pattern.test(message)) {
-      return true;
-    }
-  }
-  
-  return false;
+export function sanitizeUrl(url: string): string {
+  if (typeof url !== 'string') return url;
+
+  // Only hide our specific sensitive URL
+  return url.replace('langflow-tv34o.ondigitalocean.app', '[BACKEND_HIDDEN]');
 }
 
 /**
- * Sanitizes a message by removing or masking sensitive information
- */
-export function sanitizeMessage(message: string): string {
-  let sanitized = message;
-  
-  // Replace URLs with masked versions
-  sanitized = sanitized.replace(/https?:\/\/[^\s]+/g, '[URL_HIDDEN]');
-  
-  // Replace Bearer tokens
-  sanitized = sanitized.replace(/Bearer\s+[A-Za-z0-9\-._~+/]+=*/g, 'Bearer [TOKEN_HIDDEN]');
-  
-  // Replace API keys
-  sanitized = sanitized.replace(/sk-[A-Za-z0-9]+/g, 'sk-[KEY_HIDDEN]');
-  
-  // Replace API key headers
-  sanitized = sanitized.replace(/x-api-key:\s*[^\s]+/g, 'x-api-key: [KEY_HIDDEN]');
-  
-  return sanitized;
-}
-
-/**
- * Minimal console security - disabled in development to avoid React issues
+ * DISABLED - No console security to prevent React interference
  */
 export function setupSecureConsole() {
-  // DISABLE console overrides in development to prevent React issues
-  if (process.env.NODE_ENV === 'development') {
-    console.debug('[SECURITY] Console security disabled in development mode for compatibility');
-    return;
-  }
-
-  // Only apply minimal security in production
-  console.debug('[SECURITY] Minimal console security enabled for production');
+  // COMPLETELY DISABLED - Let React work normally
+  console.debug('[SECURITY] Console security completely disabled for React compatibility');
 }
 
 /**
- * Minimal network security - only for production
+ * DISABLED - No network security to prevent React interference
  */
 export function setupNetworkSecurity() {
-  // Disable network interception in development to avoid issues
-  if (process.env.NODE_ENV === 'development') {
-    console.debug('[SECURITY] Network security disabled in development mode');
-    return;
-  }
-
-  console.debug('[SECURITY] Minimal network security enabled for production');
+  // COMPLETELY DISABLED - Let network requests work normally
+  console.debug('[SECURITY] Network security completely disabled for React compatibility');
 }
 
 /**
- * Disable all console methods in production if configured - DISABLED for compatibility
+ * DISABLED - No console disabling to prevent React interference
  */
 export function disableConsoleInProduction() {
-  // DISABLED to prevent React and other library issues
-  console.debug('[SECURITY] Console disabling disabled for compatibility');
+  // COMPLETELY DISABLED - Let React use console normally
+  console.debug('[SECURITY] Console disabling completely disabled for React compatibility');
 }
 
 /**
- * Initialize all security measures
+ * SIMPLIFIED - Initialize minimal security (basically nothing)
  */
 export function initializeSecurity() {
+  // Only call the disabled functions for logging
   setupSecureConsole();
   setupNetworkSecurity();
-
-  // Optionally disable all console output in production
   disableConsoleInProduction();
 
-  if (process.env.NODE_ENV === 'development') {
-    console.debug('[SECURITY] Security measures initialized');
-  }
+  console.debug('[SECURITY] All security measures disabled for React compatibility');
 }

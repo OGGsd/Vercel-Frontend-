@@ -8,11 +8,9 @@ import "./style/index.css";
 import "./App.css";
 import "./style/applies.css";
 
-// Import and initialize comprehensive security measures
-import { initializeSecurity } from "./utils/security-utils";
-
-// Initialize security to hide sensitive URLs and data from console
-initializeSecurity();
+// Security completely disabled for React compatibility
+// import { initializeSecurity } from "./utils/security-utils";
+// initializeSecurity();
 
 // @ts-ignore
 import App from "./customization/custom-App";
