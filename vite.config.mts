@@ -38,6 +38,9 @@ export default defineConfig(({ mode }) => {
     base: BASENAME || "",
     build: {
       outDir: "build",
+      // Production security enhancements
+      sourcemap: mode === 'development', // Only generate sourcemaps in development
+      minify: mode === 'production', // Use default minification in production
     },
     define: {
       "process.env.BACKEND_URL": JSON.stringify(
@@ -52,6 +55,13 @@ export default defineConfig(({ mode }) => {
       ),
       "process.env.LANGFLOW_FEATURE_MCP_COMPOSER": JSON.stringify(
         envLangflow.LANGFLOW_FEATURE_MCP_COMPOSER ?? "false",
+      ),
+      // Security-related environment variables
+      "process.env.REACT_APP_DISABLE_CONSOLE_LOGS": JSON.stringify(
+        mode === 'production' ? 'true' : 'false'
+      ),
+      "process.env.REACT_APP_SECURITY_MODE": JSON.stringify(
+        mode === 'production' ? 'strict' : 'development'
       ),
     },
     plugins: [react(), svgr(), tsconfigPaths()],

@@ -64,8 +64,8 @@ ${headersSection}
 
 fetch('${apiUrl}', options)
     .then(response => response.json())
-    .then(response => console.warn(response))
-    .catch(err => console.error(err));`;
+    .then(response => console.log('API Response:', response))
+    .catch(err => console.log('API Error:', err.message || 'Request failed'));`;
   }
 
   // File upload logic - handle multiple file types additively
@@ -126,7 +126,7 @@ const authHeaders = { 'x-api-key': apiKey };`
         const ${varName} = chatUploadResult${index + 1}.file_path;
         console.log('ChatInput upload ${
           index + 1
-        } successful! File path:', ${varName});`);
+        } successful!');`);
 
     const originalTweak = tweaks[nodeId];
     const modifiedTweak = { ...originalTweak };
@@ -172,7 +172,7 @@ const authHeaders = { 'x-api-key': apiKey };`
         const ${varName} = fileUploadResult${index + 1}.path;
         console.log('File upload ${
           index + 1
-        } successful! File path:', ${varName});`);
+        } successful!');`);
 
     const originalTweak = tweaks[nodeId];
     const modifiedTweak = { ...originalTweak };
@@ -296,10 +296,10 @@ ${allTweaks}
 
         const result = await makeRequest(executeOptions, executePayload);
         console.log('Flow execution successful!');
-        console.log(result);
+        console.log('Result:', result);
 
     } catch (error) {
-        console.error('Error:', error.message);
+        console.log('Execution error:', error.message || 'Request failed');
     }
 }
 

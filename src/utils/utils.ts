@@ -869,8 +869,32 @@ export function testIdCase(str: string): string {
 }
 
 export const convertUTCToLocalTimezone = (timestamp: string) => {
-  const localTimezone = moment.tz.guess();
-  return moment.utc(timestamp).tz(localTimezone).format("MM/DD/YYYY HH:mm:ss");
+  try {
+    // Check if timestamp is already in a valid format
+    if (!timestamp || typeof timestamp !== 'string') {
+      return timestamp;
+    }
+
+    // If it's already in MM/DD/YYYY format, return as is
+    if (/^\d{2}\/\d{2}\/\d{4}\s+\d{2}:\d{2}:\d{2}$/.test(timestamp)) {
+      return timestamp;
+    }
+
+    const localTimezone = moment.tz.guess();
+
+    // Try to parse the timestamp - if it fails, return original
+    const momentObj = moment.utc(timestamp);
+
+    if (!momentObj.isValid()) {
+      console.warn('[DATE] Invalid timestamp format:', timestamp);
+      return timestamp; // Return original if invalid
+    }
+
+    return momentObj.tz(localTimezone).format("MM/DD/YYYY HH:mm:ss");
+  } catch (error) {
+    console.warn('[DATE] Error converting timestamp:', timestamp, error);
+    return timestamp; // Return original on error
+  }
 };
 
 export const formatNumber = (num: number | undefined): string => {

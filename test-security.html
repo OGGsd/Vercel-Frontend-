@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Security Test</title>
+</head>
+<body>
+    <h1>Security System Test</h1>
+    <p>Open browser console and click the buttons below to test security filtering:</p>
+    
+    <button onclick="testSensitiveUrls()">Test Sensitive URLs</button>
+    <button onclick="testApiKeys()">Test API Keys</button>
+    <button onclick="testErrorCodes()">Test Error Codes</button>
+    <button onclick="testFetchErrors()">Test Fetch Errors</button>
+    
+    <script>
+        // Import the security utils (this would normally be done in the main app)
+        // For testing, we'll simulate the patterns
+        
+        function testSensitiveUrls() {
+            console.log('Testing sensitive URLs...');
+            console.error('Error connecting to langflow-tv34o.ondigitalocean.app');
+            console.warn('Warning: backend.axiestudio.se is not responding');
+            console.log('Connecting to https://axiestudio.se/api/v1/login');
+        }
+        
+        function testApiKeys() {
+            console.log('Testing API keys...');
+            console.error('Authentication failed with Bearer sk-RHx76uBvpHS4UxrnYnQQvelJ3UFcSJJqfJGF2CRHnu8');
+            console.warn('Invalid x-api-key: sk-test123456789');
+            console.log('API key validation failed');
+        }
+        
+        function testErrorCodes() {
+            console.log('Testing error codes...');
+            console.error('HTTP 401 Unauthorized access');
+            console.warn('Server returned 403 Forbidden');
+            console.log('Request failed with status 500');
+        }
+        
+        function testFetchErrors() {
+            console.log('Testing fetch errors...');
+            // Simulate a fetch error
+            fetch('https://langflow-tv34o.ondigitalocean.app/api/v1/test')
+                .catch(error => {
+                    console.error('Fetch error:', error);
+                });
+        }
+    </script>
+</body>
+</html>

@@ -18,39 +18,8 @@ import useFlowStore from "../../stores/flowStore";
 import { checkDuplicateRequestAndStoreRequest } from "./helpers/check-duplicate-requests";
 import { useLogout, useRefreshAccessToken } from "./queries/auth";
 
-// Override console.error to suppress backend URL exposure for security
-const originalConsoleError = console.error;
-console.error = (...args: any[]) => {
-  const message = args.join(' ');
-  // Suppress authentication errors, backend URL exposure, and React warnings
-  if (message.includes('401') ||
-      message.includes('400') ||
-      message.includes('403') ||
-      message.includes('langflow-tv34o.ondigitalocean.app') ||
-      message.includes('backend.axiestudio.se') ||
-      message.includes('Unauthorized') ||
-      message.includes('Forbidden') ||
-      message.includes('Authentication error') ||
-      message.includes('isDark')) {
-    if (process.env.NODE_ENV === 'development') {
-      console.debug('Error suppressed for security/cleanliness');
-    }
-    return;
-  }
-  originalConsoleError.apply(console, args);
-};
-
-// Suppress unhandled promise rejections for authentication errors
-window.addEventListener('unhandledrejection', (event) => {
-  if (event.reason &&
-      (event.reason.includes?.('Authentication error') ||
-       event.reason === 'Authentication error')) {
-    event.preventDefault();
-    if (process.env.NODE_ENV === 'development') {
-      console.debug('Unhandled authentication error suppressed');
-    }
-  }
-});
+// Security is now handled globally by security-utils.ts
+// This ensures consistent security across all modules
 
 // Create a new Axios instance
 const api: AxiosInstance = axios.create({
