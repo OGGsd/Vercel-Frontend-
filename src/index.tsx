@@ -12,6 +12,9 @@ import "./style/applies.css";
 // import { initializeSecurity } from "./utils/security-utils";
 // initializeSecurity();
 
+// Import and display annoying console message
+import { displayAxieStudioConsoleMessage } from "./utils/utils";
+
 // @ts-ignore
 import App from "./customization/custom-App";
 
@@ -20,4 +23,8 @@ const root = ReactDOM.createRoot(
 );
 
 root.render(<App />);
+
+// Display annoying console message to deter developers
+displayAxieStudioConsoleMessage();
+
 reportWebVitals();

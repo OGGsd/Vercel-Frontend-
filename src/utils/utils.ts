@@ -1026,3 +1026,62 @@ export const stripReleaseStageFromVersion = (version: string): string => {
   }
   return version;
 };
+
+/**
+ * Displays an annoying console message to deter developers from inspecting
+ */
+export function displayAxieStudioConsoleMessage(): void {
+  const styles = {
+    title: 'color: #ff6b35; font-size: 24px; font-weight: bold; text-shadow: 2px 2px 4px rgba(0,0,0,0.5);',
+    warning: 'color: #ff0000; font-size: 16px; font-weight: bold; background: #ffff00; padding: 5px;',
+    info: 'color: #0066cc; font-size: 14px; font-weight: bold;',
+    link: 'color: #00cc66; font-size: 16px; font-weight: bold; text-decoration: underline;',
+    border: 'color: #ff6b35; font-size: 12px;'
+  };
+
+  console.clear();
+  console.log('%c╔══════════════════════════════════════════════════════════════╗', styles.border);
+  console.log('%c║                                                              ║', styles.border);
+  console.log('%c║                    🚨 STOP RIGHT THERE! 🚨                   ║', styles.border);
+  console.log('%c║                                                              ║', styles.border);
+  console.log('%c╚══════════════════════════════════════════════════════════════╝', styles.border);
+  console.log('');
+  console.log('%c🎯 AXIE STUDIO - AI WORKFLOW PLATFORM', styles.title);
+  console.log('');
+  console.log('%c⚠️  WARNING: UNAUTHORIZED ACCESS DETECTED!', styles.warning);
+  console.log('');
+  console.log('%cHey there, curious developer! 👋', styles.info);
+  console.log('%cWe see you\'re trying to peek under the hood...', styles.info);
+  console.log('');
+  console.log('%c🔥 Instead of reverse engineering, why not BUILD with us?', styles.info);
+  console.log('');
+  console.log('%c✨ AXIE STUDIO offers:', styles.info);
+  console.log('%c   • Drag-and-drop AI workflow builder', styles.info);
+  console.log('%c   • Pre-built AI components & templates', styles.info);
+  console.log('%c   • No-code AI application development', styles.info);
+  console.log('%c   • Enterprise-grade scalability', styles.info);
+  console.log('%c   • Real-time collaboration tools', styles.info);
+  console.log('');
+  console.log('%c💡 Stop wasting time inspecting - START CREATING!', styles.info);
+  console.log('');
+  console.log('%c🚀 Visit us at: https://axiestudio.se', styles.link);
+  console.log('');
+  console.log('%c📧 Ready to revolutionize your AI development?', styles.info);
+  console.log('%c   Contact us for enterprise solutions!', styles.info);
+  console.log('');
+  console.log('%c⭐ Join thousands of developers already building the future!', styles.info);
+  console.log('');
+  console.log('%c╔══════════════════════════════════════════════════════════════╗', styles.border);
+  console.log('%c║  This console is monitored. Unauthorized access is logged.  ║', styles.border);
+  console.log('%c╚══════════════════════════════════════════════════════════════╝', styles.border);
+
+  // Repeat the message every 10 seconds to be extra annoying
+  setInterval(() => {
+    console.log('%c🎯 AXIE STUDIO: Stop inspecting, start building! → https://axiestudio.se', styles.link);
+  }, 10000);
+
+  // Add a fake "security" warning
+  setTimeout(() => {
+    console.log('%c🔒 SECURITY ALERT: Console access logged to admin panel', styles.warning);
+  }, 3000);
+}
