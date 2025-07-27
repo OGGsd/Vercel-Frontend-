@@ -25,8 +25,11 @@ console.error = (...args: any[]) => {
   // Suppress authentication errors, backend URL exposure, and React warnings
   if (message.includes('401') ||
       message.includes('400') ||
+      message.includes('403') ||
       message.includes('langflow-tv34o.ondigitalocean.app') ||
+      message.includes('backend.axiestudio.se') ||
       message.includes('Unauthorized') ||
+      message.includes('Forbidden') ||
       message.includes('Authentication error') ||
       message.includes('isDark')) {
     if (process.env.NODE_ENV === 'development') {

@@ -1,14 +1,13 @@
 // Obfuscated backend configuration - hardcoded for security
 const BACKEND_PARTS = {
   p: "https://",
-  s: "langflow",
-  i: "tv34o",
-  d: "ondigitalocean",
-  t: "app"
+  b: "backend",
+  d: "axiestudio",
+  t: "se"
 };
 
 // Construct backend URL from obfuscated parts
-const BACKEND_URL = `${BACKEND_PARTS.p}${BACKEND_PARTS.s}-${BACKEND_PARTS.i}.${BACKEND_PARTS.d}.${BACKEND_PARTS.t}`;
+const BACKEND_URL = `${BACKEND_PARTS.p}${BACKEND_PARTS.b}.${BACKEND_PARTS.d}.${BACKEND_PARTS.t}`;
 
 export const BASENAME = "";
 export const PORT = 3000;
