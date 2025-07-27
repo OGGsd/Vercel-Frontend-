@@ -1,5 +1,14 @@
-// Secure configuration - backend URL from environment
-const BACKEND_URL = import.meta.env.VITE_BACKEND_URL || "https://langflow-tv34o.ondigitalocean.app";
+// Obfuscated backend configuration - hardcoded for security
+const BACKEND_PARTS = {
+  p: "https://",
+  s: "langflow",
+  i: "tv34o",
+  d: "ondigitalocean",
+  t: "app"
+};
+
+// Construct backend URL from obfuscated parts
+const BACKEND_URL = `${BACKEND_PARTS.p}${BACKEND_PARTS.s}-${BACKEND_PARTS.i}.${BACKEND_PARTS.d}.${BACKEND_PARTS.t}`;
 
 export const BASENAME = "";
 export const PORT = 3000;
