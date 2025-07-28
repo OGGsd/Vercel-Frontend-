@@ -136,7 +136,6 @@ const router = createBrowserRouter(
                     }
                   />
                   <Route path="shortcuts" element={<ShortcutsPage />} />
-                  <Route path="messages" element={<MessagesPage />} />
                   {CustomRoutesStore()}
                 </Route>
                 {CustomRoutesStorePages()}

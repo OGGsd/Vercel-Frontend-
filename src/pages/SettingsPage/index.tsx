@@ -69,16 +69,6 @@ export default function SettingsPage(): JSX.Element {
         />
       ),
     },
-    {
-      title: "Messages",
-      href: "/settings/messages",
-      icon: (
-        <ForwardedIconComponent
-          name="MessagesSquare"
-          className="w-4 flex-shrink-0 justify-start stroke-[1.5]"
-        />
-      ),
-    },
   );
 
   // TODO: Remove this on cleanup
