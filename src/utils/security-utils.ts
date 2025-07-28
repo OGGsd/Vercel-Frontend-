@@ -10,7 +10,7 @@ export function sanitizeUrl(url: string): string {
   if (typeof url !== 'string') return url;
 
   // Only hide our specific sensitive URL
-  return url.replace('langflow-tv34o.ondigitalocean.app', '[BACKEND_HIDDEN]');
+  return url.replace('backend.axiestudio.se', '[BACKEND_HIDDEN]');
 }
 
 /**

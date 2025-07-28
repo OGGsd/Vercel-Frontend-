@@ -1,2 +1,2 @@
 //Axie Studio Backend Base URL
-export const baseURL = "https://langflow-tv34o.ondigitalocean.app";
+export const baseURL = "https://backend.axiestudio.se";
