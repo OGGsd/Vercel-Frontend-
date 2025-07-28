@@ -1,11 +1,16 @@
 import type { UseMutationResult } from "@tanstack/react-query";
 import type { ColDef, ColGroupDef } from "ag-grid-community";
 import { useEffect, useRef } from "react";
+import useAuthStore from "@/stores/authStore";
 import { useMessagesStore } from "@/stores/messagesStore";
 import {
   extractColumnsFromRows,
   prepareSessionIdForAPI,
 } from "../../../../utils/utils";
+import {
+  createUserSpecificParams,
+  filterMessagesByCurrentUser
+} from "../../../../utils/user-isolation-utils";
 import { api } from "../../api";
 import { getURL } from "../../helpers/constants";
 import { UseRequestProcessor } from "../../services/request-processor";
@@ -122,7 +127,16 @@ export const useGetMessagesPollingMutation = (
         config["params"] = { ...config["params"], ...processedParams };
       }
 
+      // Add user context to help backend filter messages properly
+      config["params"] = createUserSpecificParams(config["params"]);
+
       const data = await api.get<any>(`${getURL("MESSAGES")}`, config);
+
+      // Additional frontend safety check - filter messages by user
+      if (data.data && Array.isArray(data.data)) {
+        data.data = filterMessagesByCurrentUser(data.data);
+      }
+
       const columns = extractColumnsFromRows(data.data, mode, excludedFields);
       useMessagesStore.getState().setMessages(data.data);
 

@@ -2,6 +2,7 @@ import { ErrorBoundary } from "react-error-boundary";
 import { Outlet } from "react-router-dom";
 import AlertDisplayArea from "@/alerts/displayArea";
 import CrashErrorComponent from "@/components/common/crashErrorComponent";
+import UserIsolationDebugger from "@/components/dev/UserIsolationDebugger";
 import { GenericErrorComponent } from "./components/GenericErrorComponent";
 import { useHealthCheck } from "./hooks/use-health-check";
 
@@ -28,6 +29,8 @@ export function AppWrapperPage() {
       <div className="app-div">
         <AlertDisplayArea />
       </div>
+      {/* Development-only user isolation debugger */}
+      <UserIsolationDebugger />
     </div>
   );
 }

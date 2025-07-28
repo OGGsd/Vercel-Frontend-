@@ -1,5 +1,11 @@
 import { create } from "zustand";
 import type { MessagesStoreType } from "../types/zustand/messages";
+import {
+  filterMessagesByCurrentUser,
+  isMessageOwnedByCurrentUser,
+  logUserIsolationViolation,
+  getCurrentUserId
+} from "../utils/user-isolation-utils";
 
 export const useMessagesStore = create<MessagesStoreType>((set, get) => ({
   displayLoadingMessage: false,
@@ -13,9 +19,21 @@ export const useMessagesStore = create<MessagesStoreType>((set, get) => ({
   },
   messages: [],
   setMessages: (messages) => {
-    set(() => ({ messages: messages }));
+    const filteredMessages = filterMessagesByCurrentUser(messages);
+    set(() => ({ messages: filteredMessages }));
   },
   addMessage: (message) => {
+    // Check if message belongs to current user (safety check)
+    if (!isMessageOwnedByCurrentUser(message)) {
+      logUserIsolationViolation(
+        'addMessage',
+        message.id,
+        getCurrentUserId(),
+        message.user_id
+      );
+      return; // Don't add messages from other users
+    }
+
     const existingMessage = get().messages.find((msg) => msg.id === message.id);
     if (existingMessage) {
       get().updateMessagePartial(message);
@@ -77,7 +95,6 @@ export const useMessagesStore = create<MessagesStoreType>((set, get) => ({
           const updatedMessages = state.messages.filter(
             (msg) => !ids.includes(msg.id),
           );
-          get().setMessages(updatedMessages);
           resolve(updatedMessages);
           return { messages: updatedMessages };
         });

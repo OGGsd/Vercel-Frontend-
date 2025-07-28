@@ -9,8 +9,10 @@ import {
 } from "@/controllers/API/queries/messages";
 import TableComponent from "../../../components/core/parameterRenderComponent/components/tableComponent";
 import useAlertStore from "../../../stores/alertStore";
+import useAuthStore from "../../../stores/authStore";
 import { useMessagesStore } from "../../../stores/messagesStore";
 import { extractColumnsFromRows, messagesSorter } from "../../../utils/utils";
+import { isMessageOwnedByCurrentUser } from "../../../utils/user-isolation-utils";
 
 export default function SessionView({
   session,
@@ -84,6 +86,10 @@ export default function SessionView({
     filteredMessages = id
       ? filteredMessages.filter((message) => message.flow_id === id)
       : filteredMessages;
+
+    // Additional user isolation check - filter out messages that don't belong to current user
+    filteredMessages = filteredMessages.filter(isMessageOwnedByCurrentUser);
+
     return filteredMessages;
   }, [session, id, messages]);
 

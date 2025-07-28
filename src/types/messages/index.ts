@@ -15,6 +15,7 @@ type Message = {
   category?: string;
   properties?: any;
   content_blocks?: ContentBlock[];
+  user_id?: string; // Added for user isolation - should be provided by backend
 };
 
 export type { Message };
