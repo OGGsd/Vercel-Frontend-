@@ -186,7 +186,7 @@ const router = createBrowserRouter(
           />
         </Route>
       </Route>
-      <Route path="*" element={<CustomNavigate replace to="/flows" />} />
+      <Route path="*" element={<CustomNavigate replace to="/" />} />
     </Route>,
   ]),
   { basename: BASENAME || undefined },

@@ -46,21 +46,14 @@ export const ProtectedRoute = ({ children }) => {
   }, [isAuthenticated, autoLogin]);
 
   if (shouldRedirect || testMockAutoLogin) {
-    const currentPath = window.location.pathname + window.location.search;
-    const isHomePath = window.location.pathname === "/" || window.location.pathname === "/flows";
-    const isLoginPage = window.location.pathname.includes("login");
-    const isSignupPage = window.location.pathname.includes("signup");
-
-    // Don't redirect if already on login/signup pages
-    if (isLoginPage || isSignupPage) {
-      return children;
-    }
-
+    const currentPath = window.location.pathname;
+    const isHomePath = currentPath === "/" || currentPath === "/flows";
+    const isLoginPage = location.pathname.includes("login");
     return (
       <CustomNavigate
         to={
           "/login" +
-          (!isHomePath ? "?redirect=" + encodeURIComponent(currentPath) : "")
+          (!isHomePath && !isLoginPage ? "?redirect=" + currentPath : "")
         }
         replace
       />

@@ -1,3 +1,0 @@
-/api/* https://backend.axiestudio.se/api/:splat 200
-/health https://backend.axiestudio.se/health 200
-/* /index.html 200
