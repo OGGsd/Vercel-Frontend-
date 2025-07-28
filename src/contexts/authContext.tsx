@@ -117,6 +117,21 @@ export function AuthProvider({ children }): React.ReactElement {
     setIsAuthenticated(true);
     getUser();
     getGlobalVariables();
+
+    // Handle redirect after successful login
+    const urlParams = new URLSearchParams(window.location.search);
+    const redirectPath = urlParams.get('redirect');
+    if (redirectPath && redirectPath !== '/login') {
+      // Use setTimeout to ensure state updates are complete
+      setTimeout(() => {
+        window.location.href = redirectPath;
+      }, 100);
+    } else {
+      // Default redirect to flows page
+      setTimeout(() => {
+        window.location.href = '/flows';
+      }, 100);
+    }
   }
 
   function storeApiKey(apikey: string) {

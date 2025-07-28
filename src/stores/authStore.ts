@@ -11,7 +11,21 @@ const cookies = new Cookies();
 
 // Get token from localStorage first, then cookies for better persistence
 const getStoredToken = () => {
-  return getLocalStorage(LANGFLOW_ACCESS_TOKEN) || cookies.get(LANGFLOW_ACCESS_TOKEN) || null;
+  const localToken = getLocalStorage(LANGFLOW_ACCESS_TOKEN);
+  const cookieToken = cookies.get(LANGFLOW_ACCESS_TOKEN);
+
+  // Check if session is still valid
+  const authTimestamp = getLocalStorage("auth_timestamp");
+  if (authTimestamp) {
+    const sessionAge = Date.now() - parseInt(authTimestamp);
+    const maxSessionAge = 24 * 60 * 60 * 1000; // 24 hours
+
+    if (sessionAge < maxSessionAge) {
+      return localToken || cookieToken || null;
+    }
+  }
+
+  return null;
 };
 
 const useAuthStore = create<AuthStoreType>()(
