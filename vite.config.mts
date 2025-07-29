@@ -37,7 +37,7 @@ export default defineConfig(({ mode }) => {
   return {
     base: BASENAME || "",
     build: {
-      outDir: "dist",
+      outDir: "build",
       // Production security enhancements
       sourcemap: mode === 'development', // Only generate sourcemaps in development
       minify: mode === 'production', // Use default minification in production
