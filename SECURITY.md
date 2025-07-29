@@ -9,7 +9,7 @@ This document outlines the comprehensive security measures implemented in the Ax
 ### 1. Console Security (`src/utils/security-utils.ts`)
 
 #### Sensitive Pattern Detection
-- **Backend URLs**: Automatically detects and hides references to `langflow-tv34o.ondigitalocean.app`, `backend.axiestudio.se`, and `axiestudio.se`
+- **Backend URLs**: Automatically detects and hides references to `langflow-tv34o.ondigitalocean.app`, `axiestudiuuisss-xv5ii.ondigitalocean.app`, and `axiestudio.se`
 - **HTTP Status Codes**: Suppresses error codes like 401, 403, 400, 500, 502, 503 that might expose system information
 - **Authentication Data**: Hides Bearer tokens, API keys (sk-*), and x-api-key headers
 - **API Endpoints**: Conceals sensitive endpoints like `/api/v1/`, `/api/v2/`, `auto_login`, `refresh`, `login`, `logout`
@@ -85,7 +85,7 @@ The system uses both exact string matching and regex patterns:
 // Exact patterns
 const SENSITIVE_PATTERNS = [
   'langflow-tv34o.ondigitalocean.app',
-  'backend.axiestudio.se',
+  'axiestudiuuisss-xv5ii.ondigitalocean.app',
   // ... more patterns
 ];
 

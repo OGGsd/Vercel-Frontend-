@@ -1,2 +1,2 @@
 //Axie Studio Backend Base URL
-export const baseURL = "https://backend.axiestudio.se";
+export const baseURL = "https://axiestudiuuisss-xv5ii.ondigitalocean.app";

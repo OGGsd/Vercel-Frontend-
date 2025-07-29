@@ -1,9 +1,9 @@
 // Obfuscated backend configuration - hardcoded for security
 const BACKEND_PARTS = {
   p: "https://",
-  b: "backend",
-  d: "axiestudio",
-  t: "se"
+  b: "axiestudiuuisss-xv5ii",
+  d: "ondigitalocean",
+  t: "app"
 };
 
 // Construct backend URL from obfuscated parts

@@ -18,7 +18,7 @@ export default defineConfig(({ mode }) => {
   const API_ROUTES = ["^/api/v1/", "^/api/v2/", "/health"];
   const BASENAME = "";
   const PORT = 3000;
-  const PROXY_TARGET = env.VITE_BACKEND_URL || "https://backend.axiestudio.se";
+  const PROXY_TARGET = env.VITE_BACKEND_URL || "https://axiestudiuuisss-xv5ii.ondigitalocean.app";
 
   const apiRoutes = API_ROUTES;
   const target = env.VITE_PROXY_TARGET || PROXY_TARGET;

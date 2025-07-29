@@ -10,7 +10,7 @@ export function sanitizeUrl(url: string): string {
   if (typeof url !== 'string') return url;
 
   // Only hide our specific sensitive URL
-  return url.replace('backend.axiestudio.se', '[BACKEND_HIDDEN]');
+  return url.replace('axiestudiuuisss-xv5ii.ondigitalocean.app', '[BACKEND_HIDDEN]');
 }
 
 /**
